@@ -1,18 +1,47 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="table">
+      <Input />
+      <Table :data="getData" />
+      <Pagination :paginationData="getPagination" />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Input from "../components/Input";
+import Table from "../components/Table";
+import Pagination from "../components/Pagination";
 
 export default {
-  name: 'Home',
   components: {
-    HelloWorld
-  }
-}
+    Pagination,
+    Table,
+    Input,
+  },
+  computed: {
+    getData() {
+      return this.$store.state.people;
+    },
+    getPagination() {
+      return this.$store.state.pagination;
+    },
+  },
+  mounted() {
+    this.getPeople();
+  },
+  methods: {
+    getPeople() {
+      this.$store.dispatch("getPeople");
+    },
+  },
+};
 </script>
+
+<style lang="scss" scoped>
+.table {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+</style>
