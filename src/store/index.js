@@ -17,8 +17,8 @@ export default new Vuex.Store({
       const modifiedPeople = payload.map(function(el) {
         return {
           ...el,
-          height: +el.height,
-          mass: +el.mass,
+          height: isNaN(+el.height) ? 0 : +el.height,
+          mass: isNaN(+el.mass) ? 0 : +el.mass,
         };
       });
       state.people = modifiedPeople;
